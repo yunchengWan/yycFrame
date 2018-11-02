@@ -9,13 +9,14 @@ import android.util.Log;
 
 import com.yyc.yycframe.base.Presenter;
 import com.yyc.yycframe.base.PresenterManager;
+import com.yyc.yycframe.entity.AppDataBase;
+import com.yyc.yycframe.entity.User;
 import com.yyc.yycframe.utils.ScreenAdapter;
 import com.yyc.yycframe.utils.StatusBarUtils;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
-import io.reactivex.subjects.PublishSubject;
 
 public class MainActivity extends DaggerAppCompatActivity implements MainContract.View {
 
@@ -23,26 +24,34 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
     @Presenter
     MainContract.Presenter mPresenter;
 
+    int aaa = 0x101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        ScreenAdapter.excludeActivity(this);
-
         setContentView(R.layout.activity_main);
-
         StatusBarUtils.setStatusBarLight(this, true);
-
         PresenterManager.injectActivity(this);
 
+        findViewById(R.id.tv_main)
+                .setOnClickListener(
+                        v -> {
+                            User user = new User();
+                            aaa += 1;
+                            user.setId(aaa);
+                            user.setName("name" + aaa);
+                            user.setAge(aaa / 30);
+                            mPresenter.insertUser(user);
+                        }
+                );
 
-        PublishSubject<String> publishSubject = PublishSubject.create();
-        publishSubject.onNext("111");
-        publishSubject.onNext("222");
-        Log.d("MainActivity", Thread.currentThread().getName() + "");
-
-        publishSubject.onNext("333");
-
+        findViewById(R.id.view_main_bg)
+                .setOnClickListener(
+                        v -> {
+                            mPresenter.queryUser();
+                        }
+                );
     }
 
 }
