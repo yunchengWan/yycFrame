@@ -37,6 +37,13 @@ public abstract class BasePresenter<T extends BaseView> implements LifecycleObse
     }
 
     /**
+     * 添加Disposable
+     */
+    protected void addDisposable(Disposable disposable) {
+        mRequestQueue.add(disposable);
+    }
+
+    /**
      * 通过lifecycle来把mView置空
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

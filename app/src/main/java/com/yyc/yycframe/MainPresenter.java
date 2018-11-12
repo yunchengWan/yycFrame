@@ -8,7 +8,6 @@ import com.yyc.yycframe.entity.User;
 
 import javax.inject.Inject;
 
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -43,5 +42,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                             Log.d("MainPresenter", "Error");
                         }
                 );
+
+        addDisposable(disposable);
     }
 }
