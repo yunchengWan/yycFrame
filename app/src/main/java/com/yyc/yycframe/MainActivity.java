@@ -1,64 +1,36 @@
 package com.yyc.yycframe;
 
-import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 
-import com.yyc.yycframe.base.Presenter;
-import com.yyc.yycframe.base.PresenterManager;
-import com.yyc.yycframe.utils.StatusBarUtils;
+import com.yyc.yycframe.base.BaseActivity;
 
-import javax.inject.Inject;
+import butterknife.OnClick;
 
-import dagger.android.support.DaggerAppCompatActivity;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-
-public class MainActivity extends DaggerAppCompatActivity implements MainContract.View {
-
-    @Inject
-    @Presenter
-    MainContract.Presenter mPresenter;
+public class MainActivity extends BaseActivity<MainContract.Presenter> implements MainContract.View {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int layout() {
+        return R.layout.activity_main;
+    }
 
-        setContentView(R.layout.activity_main);
-        StatusBarUtils.setStatusBarLight(this, true);
-        PresenterManager.injectActivity(this);
+    @Override
+    protected void initView() {
+        setStatusBarDark(true);
+    }
 
-        //Room Demo
-        /*findViewById(R.id.tv_main)
-                .setOnClickListener(
-                        v -> {
-                            User user = new User();
-                            aaa += 1;
-                            user.setId(aaa);
-                            user.setName("name" + aaa);
-                            user.setAge(aaa / 30);
-                            mPresenter.insertUser(user);
-                        }
-                );
+    @Override
+    protected void initData() {
 
-        findViewById(R.id.view_main_bg)
-                .setOnClickListener(
-                        v -> {
-                            mPresenter.queryUser();
-                        }
-                );*/
+    }
 
-        Disposable d = Observable.create(
-                emitter -> new Thread(() -> {
-                    Log.d("MainActivity", "Thread: " + Thread.currentThread());
-                    emitter.onNext("123");
-                }).start()
-        ).observeOn(
-                AndroidSchedulers.mainThread()
-        ).subscribe(
-                str -> Log.d("MainActivity", "Thread: " + Thread.currentThread()),
-                Throwable::printStackTrace
-        );
+    //注解里边儿使用R2
+    @OnClick({R2.id.tv_main})
+    void handleClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_main:
+                setStatusBarColor("#00FFFF");
+                break;
+        }
     }
 
 }

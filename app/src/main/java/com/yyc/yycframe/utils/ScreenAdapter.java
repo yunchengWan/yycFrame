@@ -14,7 +14,7 @@ public class ScreenAdapter {
     private static float sNoncompatScaledDensity = 0;
 
     /**
-     * 设计图上尺寸
+     * 设计图上尺寸 以宽度适配
      */
     private static final int sUiSize = 360;
 
@@ -69,7 +69,7 @@ public class ScreenAdapter {
 
         if (sNoncompatDensity == 0) {
             //没有调用setup进行初始化
-            return;
+            throw new IllegalStateException("ScreenAdapter 没有调用setup进行初始化");
         }
 
         final float targetDensity = displayMetrics.widthPixels / sUiSize;

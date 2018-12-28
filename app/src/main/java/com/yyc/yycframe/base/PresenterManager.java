@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 public class PresenterManager {
 
     @SuppressWarnings("unchecked")
-    public static void injectView(BaseView view) {
+    private static void injectView(BaseView view) {
         Field[] fields = view.getClass().getDeclaredFields();
         for (Field f : fields) {
             if (f.getAnnotation(Presenter.class) != null) {

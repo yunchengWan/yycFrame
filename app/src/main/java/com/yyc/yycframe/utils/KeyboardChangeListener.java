@@ -1,5 +1,6 @@
 package com.yyc.yycframe.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Build;
@@ -13,7 +14,6 @@ import java.lang.ref.SoftReference;
  * simple and powerful Keyboard show/hidden listener,view {@android.R.id.content} and {@ViewTreeObserver.OnGlobalLayoutListener}
  */
 public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutListener {
-    private static final String TAG = "ListenerHandler";
     private View mContentView;
     private int mOriginHeight;
     private int mPreHeight;
@@ -36,7 +36,6 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
 
     public KeyboardChangeListener(Activity contextObj) {
         if (contextObj == null) {
-            Log.i(TAG, "contextObj is null");
             return;
         }
         mContentView = findContentView(contextObj);
@@ -62,7 +61,6 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
         }
         int currHeight = visibleRect.height();
         if (currHeight == 0) {
-            Log.i(TAG, "currHeight is 0");
             return;
         }
         boolean hasChange = false;
@@ -93,6 +91,7 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
         }
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     public void destroy() {
         if (mContentView != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

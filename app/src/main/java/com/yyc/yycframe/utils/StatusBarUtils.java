@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  */
 public class StatusBarUtils {
 
-    public static void setStatusBarLight(@NonNull Activity activity, boolean isDark) {
+    public static void setStatusBarDark(@NonNull Activity activity, boolean isDark) {
 
         //MIUI
         if (OSUtils.isMIUI6Later()) {
