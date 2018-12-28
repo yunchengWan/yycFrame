@@ -1,4 +1,4 @@
-package com.yyc.yycframe;
+package com.yyc.yycframe.ui;
 
 import android.util.Log;
 

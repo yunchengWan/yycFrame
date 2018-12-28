@@ -1,7 +1,9 @@
-package com.yyc.yycframe;
+package com.yyc.yycframe.ui;
 
 import android.view.View;
 
+import com.yyc.yycframe.R;
+import com.yyc.yycframe.R2;
 import com.yyc.yycframe.base.BaseActivity;
 
 import butterknife.OnClick;

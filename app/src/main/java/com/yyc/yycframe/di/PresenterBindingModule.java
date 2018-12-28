@@ -1,7 +1,7 @@
 package com.yyc.yycframe.di;
 
-import com.yyc.yycframe.MainContract;
-import com.yyc.yycframe.MainPresenter;
+import com.yyc.yycframe.ui.MainContract;
+import com.yyc.yycframe.ui.MainPresenter;
 
 import dagger.Binds;
 import dagger.Module;
