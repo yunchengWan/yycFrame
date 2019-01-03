@@ -18,6 +18,9 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     @Override
     protected void initView() {
         setStatusBarDark(true);
+//        mTitleBar.setTitleText("MainActivity");
+//        mTitleBar.setTitleBarBackgroundRes(R.color.colorPrimary);
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main, new MainFragment()).commit();
     }
 
     @Override
@@ -25,12 +28,17 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
 
     }
 
+    @Override
+    protected boolean useDefaultTitleBar() {
+        return true;
+    }
+
     //注解里边儿使用R2
     @OnClick({R2.id.tv_main})
     void handleClick(View v) {
         switch (v.getId()) {
             case R.id.tv_main:
-                setStatusBarColor("#00FFFF");
+                setStatusBarColor(R.color.colorPrimary);
                 break;
         }
     }

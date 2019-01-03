@@ -1,11 +1,33 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="TitleBarView">
+        <attr name="titleTextColor" format="color" />
+        <attr name="titleTextSize" format="dimension" />
+        <attr name="titleText" format="string" />
+        <attr name="titleTextGravity">
+            <enum name="left" value="1" />
+            <enum name="center" value="2" />
+            <!--<enum name="right" value="3" />-->
+        </attr>
+        <attr name="leftIconRes" format="reference" />
+        <attr name="leftIconWidth" format="dimension" />
+        <attr name="leftIconHeight" format="dimension" />
+        <attr name="leftIconMargin" format="dimension" />
+        <attr name="leftIconPadding" format="dimension" />
+        <attr name="rightIconRes" format="reference" />
+        <attr name="rightIconWidth" format="dimension" />
+        <attr name="rightIconHeight" format="dimension" />
+        <attr name="rightIconMargin" format="dimension" />
+        <attr name="rightIconPadding" format="dimension" />
+        <attr name="underlineColor" format="reference" />
+        <attr name="useCustomLayout" format="boolean" />
+    </declare-styleable>
 </resources>

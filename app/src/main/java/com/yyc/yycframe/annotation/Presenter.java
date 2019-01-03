@@ -1,4 +1,4 @@
-package com.yyc.yycframe.base;
+package com.yyc.yycframe.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

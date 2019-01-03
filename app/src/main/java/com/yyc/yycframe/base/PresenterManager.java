@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.v4.app.Fragment;
 
+import com.yyc.yycframe.annotation.Presenter;
+
 import java.lang.reflect.Field;
 
 public class PresenterManager {
