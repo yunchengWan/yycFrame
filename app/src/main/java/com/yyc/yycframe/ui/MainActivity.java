@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
 
     @Override
     protected boolean useDefaultTitleBar() {
-        return true;
+        return false;
     }
 
     //注解里边儿使用R2
