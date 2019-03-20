@@ -10,8 +10,8 @@ import android.view.View;
 
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
-    private int mVerticalSpace = 0;
-    private int mHorizontalSpace = 0;
+    private int mVerticalSpace;
+    private int mHorizontalSpace;
 
     public SpaceItemDecoration(int verticalSpace, int horizontalSpace) {
         this.mVerticalSpace = verticalSpace;
@@ -19,23 +19,44 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
 
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager == null) {
             return;
         }
-        long viewIndex = parent.getChildAdapterPosition(view);
+        int viewIndex = parent.getChildAdapterPosition(view);
         int childCount = layoutManager.getItemCount();
         if (layoutManager instanceof GridLayoutManager) {
+            int orientation = ((GridLayoutManager)layoutManager).getOrientation();
             int spanCount = ((GridLayoutManager) layoutManager).getSpanCount();
-            long spanIndex = viewIndex / spanCount;
-            if (spanIndex != 0) {
-                outRect.top = dp2px(parent.getContext(), mHorizontalSpace);
+            int spanIndex = ((GridLayoutManager) layoutManager).getSpanSizeLookup().getSpanGroupIndex(viewIndex, spanCount);
+
+            int perSpaceWidth_H = dp2px(parent.getContext(), mHorizontalSpace) * (spanCount - 1) / spanCount;
+            int perSpaceWidth_V = dp2px(parent.getContext(), mVerticalSpace) * (spanCount - 1) / spanCount;
+
+            int left = 0;
+            int right = 0;
+            int top = 0;
+            int bottom = 0;
+
+            if (orientation == GridLayoutManager.VERTICAL) {
+                //垂直
+                if (spanIndex != 0) {
+                    top = dp2px(parent.getContext(), mHorizontalSpace);
+                }
+                left = viewIndex % spanCount * (dp2px(parent.getContext(), mVerticalSpace) - perSpaceWidth_V);
+                right = perSpaceWidth_V - left;
+            } else {
+                //水平
+                if (spanIndex != 0) {
+                    left = dp2px(parent.getContext(), mHorizontalSpace);
+                }
+                top = viewIndex % spanCount * (dp2px(parent.getContext(), mHorizontalSpace) - perSpaceWidth_H);
+                bottom = perSpaceWidth_H - top;
             }
-            if (viewIndex % spanCount != spanCount - 1) {
-                outRect.right = dp2px(parent.getContext(), mVerticalSpace);
-            }
+
+            outRect.set(left, top, right, bottom);
         } else if (layoutManager instanceof LinearLayoutManager){
             if (viewIndex != childCount - 1) {
                 if (((LinearLayoutManager)layoutManager).getOrientation() == LinearLayoutManager.HORIZONTAL) {
